@@ -20,8 +20,9 @@ jobs:
           
         run: |
           # Save the SSH private key and set the permissions
-          echo ${SSH_PRIVATE_KEY} > keypair.pem
+          echo "$SSH_PRIVATE_KEY" > keypair.pem
           chmod 600 keypair.pem
+          ls -l keypair.pem
 
       - name: Deploy to EC2
         run: |
@@ -35,7 +36,8 @@ jobs:
             # Exit if error occurs
             set -e
             # Pull repository state to vm
-            git pull origin master
+            cd myCadBackend
+            git pull
             # Install dependencies, migrate the database, and Start the application
             # When the application would start - the workflow would run until the rails server was terminated.
             bundle install
