@@ -22,17 +22,15 @@ jobs:
           # Save the SSH private key and set the permissions
           echo "$SSH_PRIVATE_KEY" > keypair.pem
           chmod 600 keypair.pem
-          ls -l keypair.pem
 
       - name: Deploy to EC2
         run: |
           # Define EC2 instance details
-          # INSTANCE_ID="i-0455c1a7044a93abe" 
-          # An elastic IP was allocated to the EC2 instance
+          INSTANCE_ID="i-0540974c99e95a747" 
           ELASTIC_IP=3.222.72.155
 
           # SSH into the EC2 instance
-          ssh -o StrictHostKeyChecking=no -i keypair.pem ubuntu@$ELASTIC_IP << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i keypair.pem ubuntu@${ELASTIC_IP} << 'EOF'
             # Exit if error occurs
             set -e
             # Pull repository state to vm
