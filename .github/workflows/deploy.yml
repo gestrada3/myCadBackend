@@ -26,7 +26,6 @@ jobs:
       - name: Deploy to EC2
         run: |
           # Define EC2 instance details
-          INSTANCE_ID="i-0540974c99e95a747" 
           ELASTIC_IP=3.222.72.155
 
           # SSH into the EC2 instance
@@ -34,10 +33,10 @@ jobs:
             # Exit if error occurs
             set -e
             # Pull repository state to vm
+            rm -fr myCadBackend
+            git clone https://github.com/etc/myCadBackend.git
             cd myCadBackend
-            git pull
-            # Install dependencies, migrate the database, and Start the application
-            # When the application would start - the workflow would run until the rails server was terminated.
+            # Install dependencies, migrate the database, and start the application
             bundle install
             bundle binstubs bundler-audit brakeman rubocop --force
             bundle exec bundle audit --update
