@@ -34,7 +34,7 @@ jobs:
             set -e
             # Pull repository state to vm
             rm -fr myCadBackend
-            git clone https://github.com/etc/myCadBackend.git
+            git clone https://github.com/gestrada3/myCadBackend.git
             cd myCadBackend
             # Install dependencies, migrate the database, and start the application
             bundle install
