@@ -15,7 +15,7 @@ jobs:
 
       - name: Set up Environment Variables
         env:
-          #These are github secrets.
+          #These are github secrets
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           
         run: |
@@ -32,11 +32,14 @@ jobs:
           ssh -o StrictHostKeyChecking=no -i keypair.pem ubuntu@${ELASTIC_IP} << 'EOF'
             # Exit if error occurs
             set -e
+            #
             # Pull repository state to vm
             rm -fr myCadBackend
             git clone https://github.com/gestrada3/myCadBackend.git
             cd myCadBackend
+            #
             # Install dependencies, migrate the database, and start the application
+            export PATH=/home/ubuntu/.local/share/mise/installs/ruby/3.4.7/bin:${PATH}
             bundle install
             bundle binstubs bundler-audit brakeman rubocop --force
             bundle exec bundle audit --update
