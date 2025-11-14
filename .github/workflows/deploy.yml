@@ -34,7 +34,7 @@ jobs:
             set -e
             #
             # Pull repository state to vm
-            rm -fr myCadBackend
+            sudo rm -fr myCadBackend
             git clone https://github.com/gestrada3/myCadBackend.git
             cd myCadBackend
             #
